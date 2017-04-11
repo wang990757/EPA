@@ -7,7 +7,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 
 class Login extends Component {
@@ -76,6 +77,8 @@ class Login extends Component {
     that.setState({
         msg : this.state.username+' Logined.'
     });
+    
+
   }
 
 
