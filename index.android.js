@@ -10,38 +10,35 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
-import ImageTest from './pages/demo/ImageTest';
+// import ImageTest from './pages/demo/ImageTest';
+// import UserTest from './pages/demo/UserTest';
 
+import Login from './pages/login';
 
 export default class epaApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImageTest />
+        <Login />
       </View>
     );
   }
+
+ _press(){
+   console.log('pressed')
+ }
+  
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    alignItems: 'center'
+  }
+
 });
 
 AppRegistry.registerComponent('epaApp', () => epaApp);
