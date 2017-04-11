@@ -72,7 +72,7 @@ class Login extends Component {
    * Login逻辑,请求后台，并存储token
    */
   _submitLogin(){
-    console.log('submitLogin...');
+    console.log('__DEV__');
     var that = this;
     that.setState({
         msg : this.state.username+' Logined.'
