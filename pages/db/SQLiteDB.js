@@ -1,12 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+
 
 
 import SQLiteStorage from 'react-native-sqlite-storage';
@@ -20,7 +15,7 @@ const database_size = 200000;
 let db;
 
 
-class SQLiteDB {
+class SQLiteDB{
 
     open(){
         if(!db){
@@ -37,6 +32,7 @@ class SQLiteDB {
                 });
         }
         console.log(db);
+        return db;
     }
 
     close(){
@@ -59,5 +55,5 @@ class SQLiteDB {
 }
 
 
-module.exports = SQLiteDB;
+module.exports = new SQLiteDB();
 

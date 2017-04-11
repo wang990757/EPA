@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
   avatarContainer: {
-    borderColor: '#9B9B9B',
+    borderColor: '#9B9B9C',
     borderWidth: 1 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
