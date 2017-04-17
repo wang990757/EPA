@@ -45,9 +45,6 @@ export default class epaApp extends Component {
     }
   }
 
- _press(){
-   console.log('pressed')
- }
   
 }
 
