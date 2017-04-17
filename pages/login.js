@@ -1,4 +1,6 @@
-
+/**
+ *
+ */
 
 import React, { Component } from 'react';
 import {
@@ -11,7 +13,7 @@ import {
   Linking
 } from 'react-native';
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
