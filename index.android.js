@@ -12,9 +12,15 @@ import {
 import Login from './pages/login';
 import Main from './pages/main';
 
-import Add from './pages/demo/curd/add';
+import CheckList from './pages/app/check/check-list';
+import QualityList from './pages/app/quality/quality-list';
+import TechnologyList from './pages/app/technology/technology-list';
 
-export default class epaApp extends Component {
+
+import { StackNavigator } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
+
+class epaApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,8 +28,29 @@ export default class epaApp extends Component {
         };
     }
 
+    static navigationOptions = {
+        title : '涂装数字化管理系统'
+    }
+
     componentWillMount() {
         this.clearLog();
+        const resetMainAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Main'})
+            ]
+        })
+        const resetLoginAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Login'})
+            ]
+        })
+        if(this.state.userLogin){
+            this.props.navigation.dispatch(resetMainAction);
+        }else{
+            this.props.navigation.dispatch(resetLoginAction);
+        }
     }
 
     _afterLogin(state){
@@ -34,12 +61,7 @@ export default class epaApp extends Component {
     }
 
     render() {
-        // if(this.state.userLogin){
-        //     return(<Main />);
-        // }else{
-        //     return(<Login afterLogin={(state)=>{this._afterLogin(state)}} />);
-        // }
-        return(<Add errorMsg={(str)=>{this._callback(str)}} />);
+        return null;
     }
 
     _callback(str){
@@ -66,4 +88,16 @@ export default class epaApp extends Component {
     }
 
 }
-AppRegistry.registerComponent('epaApp', () => epaApp);
+
+
+//注册APP页面
+const EpaApp = StackNavigator({
+    Index: { screen: epaApp },
+    Login: { screen: Login },
+    Main: { screen: Main },
+    CheckList: {screen: CheckList},
+    QualityList: {screen: QualityList},
+    TechnologyList: {screen: TechnologyList},
+})
+
+AppRegistry.registerComponent('epaApp', () => EpaApp);

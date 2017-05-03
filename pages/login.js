@@ -11,6 +11,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import { NavigationActions } from 'react-navigation';
+
 export default class Login extends Component {
 
     constructor(props) {
@@ -20,6 +22,10 @@ export default class Login extends Component {
             username: '',
             password: ''
         };
+    }
+
+    static navigationOptions = {
+        title : '登录'
     }
 
 
@@ -80,7 +86,13 @@ export default class Login extends Component {
         that.setState({
             msg: this.state.username + ' Logined.'
         });
-        this.props.afterLogin(true);
+        const resetMainAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Main'})
+            ]
+        });
+        this.props.navigation.dispatch(resetMainAction);
     }
 
 
