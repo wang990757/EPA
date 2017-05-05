@@ -46,6 +46,7 @@ class epaApp extends Component {
                 NavigationActions.navigate({ routeName: 'Login'})
             ]
         })
+        /*判断登录状态，并将导航stack清除*/
         if(this.state.userLogin){
             this.props.navigation.dispatch(resetMainAction);
         }else{
