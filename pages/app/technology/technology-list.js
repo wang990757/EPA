@@ -28,6 +28,8 @@ var data_data = [
     {dataName: '工程黄4', date: '2017-04-20 08:00:00'}
 ];
 
+
+import BaseStyles from '../../base-style';
 import ViewButton from '../../commons/ViewButton';
 
 
@@ -50,7 +52,7 @@ export default class TechnologyList extends Component {
         return (
             <View style={styles.container}>
                 {/*左侧区域列表*/}
-                <View style={styles.leftSide}>
+                <View style={BaseStyles.leftSide}>
                     <ListView style={styles.areaList}
                               dataSource={this.state.areaList}
                               renderRow={(rowData) => this._renderAreaListRow(rowData, this)}
@@ -59,7 +61,7 @@ export default class TechnologyList extends Component {
                     />
                 </View>
                 {/*右侧数据条列表*/}
-                <View style={styles.rightSide}>
+                <View style={BaseStyles.rightSide}>
                     <View style={styles.dataHeader}>
                         <ViewButton text="添加工艺"
                                     onPress={()=>this._addTechnology(this)}
@@ -68,13 +70,13 @@ export default class TechnologyList extends Component {
                     {/*表头*/}
                     <View style={[styles.dataRowView, styles.greyBack]}>
                         <View style={styles.dataRowViewItem}>
-                            <Text style={styles.titleText}>数据条名称</Text>
+                            <Text style={BaseStyles.titleText}>数据条名称</Text>
                         </View>
                         <View style={styles.dataRowViewItem}>
-                            <Text style={styles.titleText}>创建时间</Text>
+                            <Text style={BaseStyles.titleText}>创建时间</Text>
                         </View>
                         <View style={styles.dataRowViewItem}>
-                            <Text style={styles.titleText}>操作</Text>
+                            <Text style={BaseStyles.titleText}>操作</Text>
                         </View>
                     </View>
                     {/*数据条列表表头*/}
@@ -94,8 +96,8 @@ export default class TechnologyList extends Component {
             <View style={styles.renderAreaListRow}>
                 <ViewButton text={rowData}
                             onPress={() => this._selectedTechnology(rowData, this)}
-                            boxStyle={styles.areaBut}
-                            textStyle={styles.areaText}
+                            boxStyle={BaseStyles.areaBut}
+                            textStyle={BaseStyles.areaButText}
                 />
             </View>
         );
@@ -105,13 +107,13 @@ export default class TechnologyList extends Component {
         return (
             <View style={styles.dataRowView}>
                 <View style={styles.dataRowViewItem}>
-                    <Text style={styles.titleText}>{rowData.dataName}</Text>
+                    <Text style={BaseStyles.contentText}>{rowData.dataName}</Text>
                 </View>
                 <View style={styles.dataRowViewItem}>
-                    <Text style={styles.titleText}>{rowData.date}</Text>
+                    <Text style={BaseStyles.contentText}>{rowData.date}</Text>
                 </View>
                 <View style={styles.dataRowViewItem}>
-                    <Text style={styles.titleText}>操作</Text>
+                    <Text style={BaseStyles.contentText}>操作</Text>
                 </View>
             </View>
         )
@@ -143,43 +145,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-start'
     },
-    leftSide: {
-        width: 280,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRightWidth: 2,
-        borderRightColor: "#CCCCCC"
-    },
-    rightSide: {
-        width: width - 280,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: '#00FF99'
-    },
     areaList: {
         width: 280,
-        // backgroundColor: '#ccb5c5',
     },
     renderAreaListRow: {
         justifyContent: 'center',
         alignItems: 'center',
         width: 280,
-    },
-    areaBut: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 8,
-        marginBottom: 4,
-        width: 220,
-        height: 60,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 6
-    },
-    areaText: {
-        color: '#000000',
-        fontSize: 20
     },
     dataRowView: {
         flexDirection: 'row',
@@ -206,14 +178,6 @@ const styles = StyleSheet.create({
         width: (width - 280) / 3,
         height: 60,
         borderRightWidth:1,
-    },
-    titleText: {
-        fontSize: 20,
-        color: '#000000',
-    },
-    contentText: {
-        fontSize: 18,
-        color: '#000000',
     },
     dataList:{
         width: width - 280
