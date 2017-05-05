@@ -22,6 +22,18 @@ const BaseStyles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius: 6
     },
+    areaButSeleted: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 8,
+        marginBottom: 4,
+        width: 220,
+        height: 60,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 6,
+        borderColor: '#669999',
+        borderWidth:2
+    },
     areaButText: {
         color: '#000000',
         fontSize: 20
@@ -48,7 +60,7 @@ const BaseStyles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#00FF99'
+        // backgroundColor: '#00FF99'
     }
 });
 

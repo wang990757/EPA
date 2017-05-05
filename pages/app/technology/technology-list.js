@@ -18,8 +18,19 @@ import {
 var dimensions = require('Dimensions');
 var {width, height} = dimensions.get('window');
 
-var area_data = ['PTED', 'EDS',
-    'UBC', 'PRM', 'MSD', 'TCT', 'FNS', 'VQ', 'VQ', 'VQ', 'VQ'];
+var area_data = [
+    {id: 1, name: 'PTED'},
+    {id: 2, name: 'EDS'},
+    {id: 3, name: 'UBC'},
+    {id: 4, name: 'PRM'},
+    {id: 5, name: 'MSD'},
+    {id: 6, name: 'TCT'},
+    {id: 7, name: 'FNS'},
+    {id: 8, name: 'VQ'},
+    {id: 9, name: 'RS'},
+    {id: 10, name: 'TW'},
+    {id: 11, name: 'ZH'}
+];
 var data_data = [
     {dataName: '工程黄1', date: '2017-04-20 08:00:00'},
     {dataName: '工程黄1', date: '2017-04-20 08:00:00'},
@@ -55,7 +66,7 @@ export default class TechnologyList extends Component {
                 <View style={BaseStyles.leftSide}>
                     <ListView style={styles.areaList}
                               dataSource={this.state.areaList}
-                              renderRow={(rowData) => this._renderAreaListRow(rowData, this)}
+                              renderRow={(rowData) => this._renderAreaListRow(rowData)}
                               enableEmptySections={true}
                               automaticallyAdjustContentInsets={false}
                     />
@@ -64,7 +75,7 @@ export default class TechnologyList extends Component {
                 <View style={BaseStyles.rightSide}>
                     <View style={styles.dataHeader}>
                         <ViewButton text="添加工艺"
-                                    onPress={()=>this._addTechnology(this)}
+                                    onPress={() => this._addTechnology(this)}
                         />
                     </View>
                     {/*表头*/}
@@ -91,19 +102,19 @@ export default class TechnologyList extends Component {
         );
     }
 
-    _renderAreaListRow(rowData, that) {
+    _renderAreaListRow(rowData) {
         return (
             <View style={styles.renderAreaListRow}>
-                <ViewButton text={rowData}
-                            onPress={() => this._selectedTechnology(rowData, this)}
-                            boxStyle={BaseStyles.areaBut}
+                <ViewButton text={rowData.name}
+                            onPress={() => this._selectedTechnology(rowData)}
+                            boxStyle={(rowData.selected == true) ? BaseStyles.areaButSeleted : BaseStyles.areaBut}
                             textStyle={BaseStyles.areaButText}
                 />
             </View>
         );
     }
 
-    _renderDataListRow(rowData,that){
+    _renderDataListRow(rowData, that) {
         return (
             <View style={styles.dataRowView}>
                 <View style={styles.dataRowViewItem}>
@@ -121,18 +132,26 @@ export default class TechnologyList extends Component {
 
     _addTechnology(that) {
         console.log('添加工艺');
+        const {navigate} = that.props.navigation;
+        navigate('TechnologyAdd');
+        return;
     }
 
-    _selectedTechnology(areaId, that) {
-        console.log('选择区域：' + areaId);
+    _selectedTechnology(areaObj) {
+        console.log('选择区域：' + areaObj.name);
         var data = data_data;
-        for (var i in data){
-            data[i].dataName = areaId + '工程黄'+i;
+        for (var i in data) {
+            data[i].dataName = areaObj.name + '工程黄' + i;
         }
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        var areaData = area_data;
+        for(var i in areaData){
+            areaData[i].selected = false;
+        }
+        areaObj.selected = true;
         this.setState({
-            dataList: ds.cloneWithRows(data),
-            selectedArea : areaId
+            areaList: ds.cloneWithRows(areaData),
+            dataList: ds.cloneWithRows(data)
         });
     }
 
@@ -158,15 +177,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         width: width - 280,
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
 
     },
-    dataHeader:{
+    dataHeader: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         width: width - 280,
-        paddingRight:20
+        paddingRight: 20
     },
     greyBack: {
         backgroundColor: '#CCCCCC'
@@ -177,9 +196,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: (width - 280) / 3,
         height: 60,
-        borderRightWidth:1,
+        borderRightWidth: 1,
     },
-    dataList:{
+    dataList: {
         width: width - 280
     }
 });
