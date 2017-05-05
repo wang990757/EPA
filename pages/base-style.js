@@ -59,7 +59,7 @@ const BaseStyles = StyleSheet.create({
         width: width - 280,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         // backgroundColor: '#00FF99'
     }
 });

@@ -18,8 +18,13 @@ import {
 var dimensions = require('Dimensions');
 var {width, height} = dimensions.get('window');
 
+
+/**
+ * 假数据
+ * @type {[*]}
+ */
 var area_data = [
-    {id: 1, name: 'PTED'},
+    {id: 1, name: 'PTED',selected:true},
     {id: 2, name: 'EDS'},
     {id: 3, name: 'UBC'},
     {id: 4, name: 'PRM'},
@@ -32,11 +37,11 @@ var area_data = [
     {id: 11, name: 'ZH'}
 ];
 var data_data = [
-    {dataName: '工程黄1', date: '2017-04-20 08:00:00'},
-    {dataName: '工程黄1', date: '2017-04-20 08:00:00'},
-    {dataName: '工程黄2', date: '2017-04-20 08:00:00'},
-    {dataName: '工程黄3', date: '2017-04-20 08:00:00'},
-    {dataName: '工程黄4', date: '2017-04-20 08:00:00'}
+    {id: 1,dataName: '工程黄1', date: '2017-04-20 08:00:00',selected:true},
+    {id: 2,dataName: '工程黄1', date: '2017-04-20 08:00:00',selected:false},
+    {id: 3,dataName: '工程黄2', date: '2017-04-20 08:00:00',selected:false},
+    {id: 4,dataName: '工程黄3', date: '2017-04-20 08:00:00',selected:false},
+    {id: 5,dataName: '工程黄4', date: '2017-04-20 08:00:00',selected:false}
 ];
 
 
@@ -54,7 +59,8 @@ export default class TechnologyList extends Component {
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             areaList: ds.cloneWithRows(area_data),
-            dataList: ds.cloneWithRows(data_data)
+            dataList: ds.cloneWithRows(data_data),
+            selectedAreaId : '1'
         };
     }
 
@@ -75,7 +81,7 @@ export default class TechnologyList extends Component {
                 <View style={BaseStyles.rightSide}>
                     <View style={styles.dataHeader}>
                         <ViewButton text="添加工艺"
-                                    onPress={() => this._addTechnology(this)}
+                                    onPress={this._addTechnology.bind(this)}
                         />
                     </View>
                     {/*表头*/}
@@ -130,13 +136,22 @@ export default class TechnologyList extends Component {
         )
     }
 
-    _addTechnology(that) {
-        console.log('添加工艺');
-        const {navigate} = that.props.navigation;
-        navigate('TechnologyAdd');
-        return;
+    /**
+     * 转到添加页面，传参 selectedAreaId dataList
+     * @param that
+     * @private
+     */
+    _addTechnology() {
+        console.log('添加工艺'+this.state.selectedAreaId);
+        const {navigate} = this.props.navigation;
+        navigate('TechnologyAdd',{selectedAreaId:'selectedAreaId',dataList:data_data});
     }
 
+    /**
+     * 选择左侧区域
+     * @param areaObj
+     * @private
+     */
     _selectedTechnology(areaObj) {
         console.log('选择区域：' + areaObj.name);
         var data = data_data;
@@ -151,7 +166,8 @@ export default class TechnologyList extends Component {
         areaObj.selected = true;
         this.setState({
             areaList: ds.cloneWithRows(areaData),
-            dataList: ds.cloneWithRows(data)
+            dataList: ds.cloneWithRows(data),
+            selectedAreaId : areaObj.id
         });
     }
 
