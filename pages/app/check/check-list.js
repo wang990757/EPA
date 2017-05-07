@@ -1,5 +1,5 @@
 /**
- * Created by zhaobin on 2017/5/3.
+ * Created by wangkai on 2017/5/5.
  */
 
 import React, {Component} from 'react';
@@ -14,7 +14,13 @@ import {
 import TableView from '../../commons/tableView'
 import ReaioButtons from '../../commons/redioButtons'
 import DatePicker from '../../commons/datePicker'
-var data=[{id:1,name:'aaa',title:'title1'},{id:2,name:'bbb',title:'title1'},{id:3,name:'ccc',title:'title1'}];
+import Radio from '../../commons/radio'
+var data=[{id:1,name:'任务1',createDate:'2017-01-03',status:'0'},
+    {id:1,name:'任务2',createDate:'2017-01-04',status:'0'},
+    {id:1,name:'任务3',createDate:'2017-01-05',status:'0'},
+    {id:1,name:'任务4',createDate:'2017-01-06',status:'1'},
+    {id:1,name:'任务5',createDate:'2017-01-07',status:'1'}
+    ];
 export default class CheckList extends Component {
     static navigationOptions = {
         title: '点检'
@@ -22,10 +28,11 @@ export default class CheckList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            listData: [{id:1,name:'任务1',createDate:'2017-01-03',status:'0'}]
+        }
+        ;
     }
-
-
     render() {
         return (
             <View style={styles.container}>
@@ -35,24 +42,37 @@ export default class CheckList extends Component {
                   </View>
                   <View style={styles.head_right}>
                     <View>
-                        <View ></View>
-                        <View></View>
+                        <Radio
+                            dataSource={[{key:'0',name:'未完成'},{key:'1',name:'未提交'}]}
+                            callback={
+                                (data)=>{
+                                    const v=data.key;
+                                    this.getDataByQuery([{key:'status',value:v}]);
+                                }
+                            }
+                        />
                     </View>
                   </View>
               </View>
               <View style={styles.content}>
                 <View style={styles.content_left}>
                   <View style={styles.content_left_head}>
-                    <Text style={styles.head_text}>区域</Text>
+                    <Text style={styles.head_text}>区域{this.state.listData.length}</Text>
                   </View>
                   <View>
-                    <ReaioButtons dataSource={data} callback={()=>{}}/>
+                    <ReaioButtons dataSource={data} callback={(data)=>{
+                        const v=data.key;
+                        this.getDataByQuery([{key:'name',value:data.name}]);
+                    }}/>
                   </View>
                 </View>
                 <View style={styles.content_right}>
                     <TableView
-                    dataSource={[{id:1,name:'aaa',title:'title1'},{id:2,name:'bbb',title:'title1'},{id:3,name:'2222222222111111222222',title:'title1'}]}
-                    field={[{column:'id',name:'ID',isKey:true},{column:'title',name:'標題'},{column:'name',name:'名稱'}]}
+                    dataSource={this.state.listData}
+                    field={[{column:'name',name:'任务名称',type:'text'},{column:'createDate',name:'任务截止时间',type:'text'},{column:'status',name:'状态',type:'codeList',keys:[{key:'0',value:'未完成'},{key:'1',value:'未提交'}]}]}
+                    callback={(data)=>{
+                        this.nav(data);
+                    }}
                     />
                 </View>
               </View>
@@ -60,6 +80,31 @@ export default class CheckList extends Component {
         );
     }
 
+    /**
+     * 跳转到编辑页面
+     * @param data
+     */
+    nav(data){
+        const {navigate} = this.props.navigation;
+        navigate('CheckEdit',data);
+    }
+    getDataByQuery(query){
+        var list=new Array();
+
+        for(var i=0;i<data.length;i++){
+
+            for(var j=0;j<query.length;j++){
+                if(data[i][query[j].key]==query[j].value){
+                    list[list.length]=data[i];
+                    break;
+                }
+            }
+        }
+
+        this.setState({
+            listData: list
+        });
+    }
 
 }
 const styles = StyleSheet.create({

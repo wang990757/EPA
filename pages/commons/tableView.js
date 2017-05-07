@@ -15,14 +15,19 @@ export default class TableView extends Component {
     componentWillMount(){
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1!== r2});
       this.state = {
-        dataSource: ds.cloneWithRows(this.props.dataSource),
-        column:this.props.column,
-        columnName:this.props.columnName
+        dataSource: ds.cloneWithRows(this.props.dataSource)
       }
     }
-
+    componentWillReceiveProps(nextProps){
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1!== r2});
+        this.state = {
+            dataSource: ds.cloneWithRows(nextProps.dataSource)
+        }
+    }
     _pressRow(data, sectionID, rowID){
-
+        if(this.props.callback!=null){
+            this.props.callback(data);
+        }
     }
     render() {
       let columns=new Array();
@@ -45,7 +50,7 @@ export default class TableView extends Component {
     _renderRow(rowData, sectionID, rowID){
         let datas=new Array();
         for(var i =0;i<this.props.field.length;i++){
-            datas[i]=this.renderListCloumnItem(rowData,this.props.field[i].column);
+            datas[i]=this.renderListCloumnItem(rowData,this.props.field[i]);
         }
 
         return (
@@ -65,12 +70,29 @@ export default class TableView extends Component {
         </View>
       )
     }
-    renderListCloumnItem(item,cName){
-      return (
-        <View key={cName} style={{flex:1,justifyContent:'center', alignItems: 'center'}}>
-        <Text style={{fontSize:20}}>{item[cName]}</Text>
-        </View>
-      )
+    renderListCloumnItem(item,column){
+
+        if(column.type=='text') {
+            return this.columnText(item[column.column]);
+        }else if(column.type=='codeList'){
+           if(column.keys!=null){
+               for(var i=0;i<column.keys.length;i++){
+                    if(column.keys[i].key==item[column.column]){
+                        return this.columnText(column.keys[i].value);
+                    }
+               }
+               return this.columnText("");
+           }else{
+               return this.columnText(item[column.column]);
+           }
+        }
+    }
+    columnText(cName){
+        return (
+            <View key={cName} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 20}}>{cName}</Text>
+            </View>
+        )
     }
 }
 
@@ -79,7 +101,7 @@ const styles = StyleSheet.create({
     borderBottomWidth:1,
     flex: 1,
     flexDirection: 'row',
-    height:40,
+    height:50,
     borderColor:'#e5e5e5',
     backgroundColor:'#fff'
   },

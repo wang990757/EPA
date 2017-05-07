@@ -90,11 +90,11 @@ export default class ReaioButtons extends Component {
 
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: '#0099FF',
+    backgroundColor: '#c1c1c1',
     flex:1,
-    height:50,
+    height:70,
     margin:5,
-    borderRadius: 12,
+    borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -104,16 +104,16 @@ const styles = StyleSheet.create({
       fontSize: 30
   },
   selectText:{
-      color:'#0099FF',
+      color:'#000',
       fontSize: 30
   },
   selectBtn: {
     backgroundColor: '#fff',
     borderColor:'#0099FF',
     flex:1,
-    height:50,
+    height:70,
     margin:5,
-    borderRadius: 12,
+    borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

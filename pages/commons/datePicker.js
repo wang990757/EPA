@@ -66,8 +66,9 @@ export default class DatePicker extends Component {
 const styles = StyleSheet.create({
     datePick:{
         width:200,
-        backgroundColor:'#fff',
-        color:'#000'
+        backgroundColor:'#c1c1c1',
+        color:'#000',
+        borderRadius:8
     }
 });
 module.exports = DatePicker
