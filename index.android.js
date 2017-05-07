@@ -15,6 +15,7 @@ import Main from './pages/main';
 import CheckList from './pages/app/check/check-list';
 import QualityList from './pages/app/quality/quality-list';
 import TechnologyList from './pages/app/technology/technology-list';
+import TechnologyAdd from './pages/app/technology/technology-add';
 
 
 import { StackNavigator } from 'react-navigation';
@@ -46,6 +47,7 @@ class epaApp extends Component {
                 NavigationActions.navigate({ routeName: 'Login'})
             ]
         })
+        /*判断登录状态，并将导航stack清除*/
         if(this.state.userLogin){
             this.props.navigation.dispatch(resetMainAction);
         }else{
@@ -98,6 +100,7 @@ const EpaApp = StackNavigator({
     CheckList: {screen: CheckList},
     QualityList: {screen: QualityList},
     TechnologyList: {screen: TechnologyList},
+    TechnologyAdd : {screen:TechnologyAdd}
 })
 
 AppRegistry.registerComponent('epaApp', () => EpaApp);

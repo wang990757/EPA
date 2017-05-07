@@ -13,6 +13,9 @@ import {
     Image
 } from 'react-native';
 
+var dimensions = require('Dimensions')
+var {width,height} = dimensions.get('window')
+
 export default class Main extends Component {
     static navigationOptions = {
         title: '主界面',
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         marginTop: 40,
-        width: 800
+        width: width*0.7
     },
     userHeader: {
         width : 140,
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: 800,
+        width: width*0.7,
         marginTop: 50
     },
     but: {
