@@ -86,7 +86,7 @@ export default class QualityDetail extends Component {
                             dataSource={this.state.listData}
                             field={[{column:'tag',name:'标签',type:'text'},{column:'value',name:'值',type:'text'}]}
                             callback={(data)=>{
-                                this.nav(data);
+                                
                             }}
                         />
                     </View>
@@ -95,14 +95,7 @@ export default class QualityDetail extends Component {
         );
     }
 
-    /**
-     * 跳转到编辑页面
-     * @param data
-     */
-    nav(data){
-        const {navigate} = this.props.navigation;
-        navigate('CheckEdit',data);
-    }
+    
     getDataByQuery(query){
         var list=new Array();
 

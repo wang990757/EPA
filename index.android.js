@@ -13,18 +13,15 @@ import Login from './pages/login';
 import Main from './pages/main';
 
 import CheckList from './pages/app/check/check-list';
-import QualityList from './pages/app/quality/quality-list';
+import CheckEdit from './pages/app/check/check-edit';
+
 import TechnologyList from './pages/app/technology/technology-list';
 import TechnologyAdd from './pages/app/technology/technology-add';
-
-import CheckEdit from './pages/app/check/check-edit';
-import QualityBlock from './pages/app/quality/quality-select-block';
-import QualityDetail from './pages/app/quality/quality-detail';
-import { StackNavigator } from 'react-navigation';
-import { NavigationActions } from 'react-navigation';
-
 import TechnologyDetail from './pages/app/technology/technology-detail';
 
+import QualityList from './pages/app/quality/quality-list';
+import QualityBlock from './pages/app/quality/quality-select-block';
+import QualityDetail from './pages/app/quality/quality-detail';
 
 import {StackNavigator} from 'react-navigation';
 import {NavigationActions} from 'react-navigation';

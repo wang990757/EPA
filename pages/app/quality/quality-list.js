@@ -183,29 +183,34 @@ export default class QualityList extends Component {
 
     _renderDataListRow(rowData, that) {
         return (
-            <View style={styles.dataRowView}>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.qx}</Text>
-                </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.carModel}</Text>
-                </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.TPS}</Text>
-                </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.bj}</Text>
-                </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.qk}</Text>
-                </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.titleText}>{rowData.savedDate}</Text>
-                </View>
-            </View>
+			<TouchableOpacity  onPress={()=>this._pressRow(rowData,that)}>
+				<View style={styles.dataRowView}>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.qx}</Text>
+					</View>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.carModel}</Text>
+					</View>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.TPS}</Text>
+					</View>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.bj}</Text>
+					</View>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.qk}</Text>
+					</View>
+					<View style={styles.dataRowViewItem}>
+						<Text style={BaseStyles.titleText}>{rowData.savedDate}</Text>
+					</View>
+				</View>
+			</TouchableOpacity>
         )
     }
-
+	_pressRow(rowData,that){
+		const {navigate} = this.props.navigation;
+        navigate('QualityDetail');
+	}
     /**
      * 转到添加页面
      */
