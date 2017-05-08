@@ -204,7 +204,7 @@ export default class QualityList extends Component {
     _addTechnology() {
         console.log('添加工艺' + this.state.selectedAreaId);
         const {navigate} = this.props.navigation;
-        // navigate('TechnologyAdd',{selectedAreaId:'selectedAreaId',dataList:data_data});
+        navigate('QualityBlock');
     }
 
     /**

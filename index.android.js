@@ -16,11 +16,11 @@ import CheckList from './pages/app/check/check-list';
 import QualityList from './pages/app/quality/quality-list';
 import TechnologyList from './pages/app/technology/technology-list';
 import TechnologyAdd from './pages/app/technology/technology-add';
-
-
+import CheckEdit from './pages/app/check/check-edit';
+import QualityBlock from './pages/app/quality/quality-select-block';
+import QualityDetail from './pages/app/quality/quality-detail';
 import { StackNavigator } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
-
 class epaApp extends Component {
     constructor(props) {
         super(props);
@@ -98,7 +98,10 @@ const EpaApp = StackNavigator({
     Login: { screen: Login },
     Main: { screen: Main },
     CheckList: {screen: CheckList},
+    CheckEdit : {screen:CheckEdit},
     QualityList: {screen: QualityList},
+    QualityBlock:{screen:QualityBlock},
+    QualityDetail:{screen:QualityDetail},
     TechnologyList: {screen: TechnologyList},
     TechnologyAdd : {screen:TechnologyAdd}
 })
