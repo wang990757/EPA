@@ -92,14 +92,11 @@ export default class TechnologyList extends Component {
                         <View style={styles.dataRowViewItem}>
                             <Text style={BaseStyles.titleText}>创建时间</Text>
                         </View>
-                        <View style={styles.dataRowViewItem}>
-                            <Text style={BaseStyles.titleText}>操作</Text>
-                        </View>
                     </View>
                     {/*数据条列表表头*/}
                     <ListView style={styles.dataList}
                               dataSource={this.state.dataList}
-                              renderRow={(rowData) => this._renderDataListRow(rowData, this)}
+                              renderRow={(rowData) => this._renderDataListRow(rowData)}
                               enableEmptySections={true}
                               automaticallyAdjustContentInsets={false}
                     />
@@ -120,8 +117,9 @@ export default class TechnologyList extends Component {
         );
     }
 
-    _renderDataListRow(rowData, that) {
+    _renderDataListRow(rowData) {
         return (
+            <TouchableOpacity onPress={()=>{this._toDetailPage(rowData)}}>
             <View style={styles.dataRowView}>
                 <View style={styles.dataRowViewItem}>
                     <Text style={BaseStyles.contentText}>{rowData.dataName}</Text>
@@ -129,11 +127,15 @@ export default class TechnologyList extends Component {
                 <View style={styles.dataRowViewItem}>
                     <Text style={BaseStyles.contentText}>{rowData.date}</Text>
                 </View>
-                <View style={styles.dataRowViewItem}>
-                    <Text style={BaseStyles.contentText}>操作</Text>
-                </View>
             </View>
+            </TouchableOpacity>
         )
+    }
+
+    _toDetailPage(rowData){
+        console.log('点击数据ID:'+rowData.id);
+        const {navigate} = this.props.navigation;
+        navigate('TechnologyDetail',{selectedDataId:rowData.id,selectedAreaId:this.state.selectedAreaId,dataList:data_data});
     }
 
     /**
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        width: (width - 280) / 3,
+        width: (width - 280) / 2,
         height: 60,
         borderRightWidth: 1,
     },
