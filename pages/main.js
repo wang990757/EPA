@@ -44,13 +44,13 @@ export default class Main extends Component {
                 {/* 点检、工艺、质量 入口 */}
                 <View style={styles.butArea}>
                     <TouchableOpacity onPress={() => this._selected('Check', this)}>
-                        <View style={styles.but}><Text>点检</Text></View>
+                        <View style={[styles.but,{backgroundColor:'#666633'}]}><Text style={styles.butText}>点检</Text></View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this._selected('Technology', this)}>
-                        <View style={styles.but}><Text>工艺</Text></View>
+                        <View style={styles.but}><Text style={styles.butText}>工艺</Text></View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this._selected('Quality', this)}>
-                        <View style={styles.but}><Text>质量</Text></View>
+                        <View style={[styles.but,{backgroundColor:'#663300'}]}><Text style={styles.butText}>质量</Text></View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -90,17 +90,19 @@ const styles = StyleSheet.create({
     },
     userHeader: {
         width : 140,
-        height: 140
+        height: 140,
+        borderRadius:70
     },
     infoRight: {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        paddingLeft : 20,
+        paddingLeft : 40,
         height : 140
     },
     infoText: {
-        fontSize: 22
+        fontSize: 22,
+        color : '#000000'
     },
     butArea: {
         flexDirection: 'row',
@@ -114,8 +116,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 200,
         height: 200,
-        backgroundColor: '#0099FF',
+        backgroundColor: '#006666',
         borderRadius: 12
+    },
+    butText:{
+        fontSize : 30,
+        color : '#FFFFFF'
     }
 });
 

@@ -8,7 +8,8 @@ import {
     Text,
     View,
     Image,
-    ListView
+    ListView,
+    ScrollView
 } from 'react-native';
 
 
@@ -66,6 +67,7 @@ export default class TechnologyDetail extends Component {
                 </View>
                 {/*右侧数据条列表*/}
                 <View style={[BaseStyles.rightSide,{paddingLeft:20}]}>
+                    <ScrollView style={{width:'100%'}}>
                     <Image style={styles.dataImage}
                            source={require('../../images/81右前门1.bmp')}/>
                     <LabelTextInput label="批次"  />
@@ -75,6 +77,11 @@ export default class TechnologyDetail extends Component {
                     <LabelTextInput label="标签3"  />
                     <LabelTextInput label="标签4"  />
                     <LabelTextInput label="标签5"  />
+                    <View style={styles.bottomBut}>
+                        <ViewButton text="删除" onPress={()=>{}} />
+                        <ViewButton text="保存" onPress={()=>{}} />
+                    </View>
+                    </ScrollView>
                 </View>
             </View>
         );
@@ -125,6 +132,12 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
 
+    },
+    bottomBut:{
+        width : '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 
 });

@@ -114,6 +114,14 @@ export default class QualityList extends Component {
             <View style={styles.container}>
                 {/*左侧区域列表*/}
                 <View style={BaseStyles.leftSide}>
+                    <ViewButton text="提交数据"
+                                onPress={()=>{Alert.alert('提交结果：',
+                                    '数据提交成功!',
+                                    [
+                                        {text: 'OK', onPress: () => console.log('OK Pressed')}
+                                    ],
+                                    { cancelable: false });}}
+                    />
                     <ListView style={styles.areaList}
                               dataSource={this.state.areaList}
                               renderRow={(rowData) => this._renderAreaListRow(rowData)}

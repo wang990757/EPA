@@ -16,21 +16,28 @@ import TableView from '../../commons/tableView';
 import ReaioButtons from '../../commons/redioButtons';
 import Radio from '../../commons/radio';
 import DefaultLabelTextInput from '../../commons/defaultLableTextInput';
-var data=[{id:1,name:'任务1',createDate:'2017-01-03',status:'0'},
-    {id:1,name:'任务2',createDate:'2017-01-04',status:'0'},
-    {id:1,name:'任务3',createDate:'2017-01-05',status:'0'},
-    {id:1,name:'任务4',createDate:'2017-01-06',status:'1'},
-    {id:1,name:'任务5',createDate:'2017-01-07',status:'1'}
+var data=[{id:1,tag:'批次',value:'PC20170106'},
+    {id:2,tag:'温度',value:'80'},
+    {id:3,tag:'胎压',value:'200'},
+    {id:4,tag:'标签1',value:'-'},
+    {id:5,tag:'标签2',value:'-'}
+];
+var dataV=[{id:1,name:'数据条1'},
+    {id:2,name:'数据条1'},
+    {id:3,name:'数据条1'},
+    {id:4,name:'数据条1'},
+    {id:5,name:'数据条1'}
 ];
 export default class QualityDetail extends Component {
     static navigationOptions = {
-        title: '点检'
+        title: '质量明细'
     }
 
     constructor(props) {
+
         super(props);
         this.state = {
-            listData: [{id:1,name:'任务1',createDate:'2017-01-03',status:'0'}]
+            listData: data
         }
         ;
     }
@@ -53,7 +60,7 @@ export default class QualityDetail extends Component {
                 <View style={styles.content}>
                     <View style={styles.content_left}>
                         <View style={styles.content_left_head}>
-                            <Text style={styles.head_text}>区域{this.state.listData.length}</Text>
+                            <Text style={styles.head_text}>车辆信息</Text>
                         </View>
                         <View style={{flex:1, flexDirection: 'column'}}>
                             <DefaultLabelTextInput label="TPS"  />
@@ -66,19 +73,18 @@ export default class QualityDetail extends Component {
                     </View>
                     <View style={styles.content_left}>
                         <View style={styles.content_left_head}>
-                            <Text style={styles.head_text}>区域{this.state.listData.length}</Text>
+                            <Text style={styles.head_text}>数据条</Text>
                         </View>
                         <View>
-                            <ReaioButtons dataSource={data} callback={(data)=>{
-                                const v=data.key;
-                                this.getDataByQuery([{key:'name',value:data.name}]);
+                            <ReaioButtons dataSource={dataV} callback={(data)=>{
+                                this.getDataByQuery([{key:'id',value:data.id}]);
                             }}/>
                         </View>
                     </View>
                     <View style={styles.content_right}>
                         <TableView
                             dataSource={this.state.listData}
-                            field={[{column:'name',name:'任务名称',type:'text'},{column:'createDate',name:'任务截止时间',type:'text'},{column:'status',name:'状态',type:'codeList',keys:[{key:'0',value:'未完成'},{key:'1',value:'未提交'}]}]}
+                            field={[{column:'tag',name:'标签',type:'text'},{column:'value',name:'值',type:'text'}]}
                             callback={(data)=>{
                                 this.nav(data);
                             }}

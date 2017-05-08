@@ -10,7 +10,8 @@ import {
     View,
     ListView,
     Button,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 }
     from
         'react-native';
@@ -70,6 +71,14 @@ export default class TechnologyList extends Component {
             <View style={styles.container}>
                 {/*左侧区域列表*/}
                 <View style={BaseStyles.leftSide}>
+                    <ViewButton text="提交数据"
+                                onPress={()=>{Alert.alert('提交结果：',
+                                    '数据提交成功!',
+                                    [
+                                        {text: 'OK', onPress: () => console.log('OK Pressed')}
+                                    ],
+                                    { cancelable: false });}}
+                    />
                     <ListView style={styles.areaList}
                               dataSource={this.state.areaList}
                               renderRow={(rowData) => this._renderAreaListRow(rowData)}
@@ -91,6 +100,9 @@ export default class TechnologyList extends Component {
                         </View>
                         <View style={styles.dataRowViewItem}>
                             <Text style={BaseStyles.titleText}>创建时间</Text>
+                        </View>
+                        <View style={styles.dataRowViewItem}>
+                            <Text style={BaseStyles.titleText}>状态</Text>
                         </View>
                     </View>
                     {/*数据条列表表头*/}
@@ -126,6 +138,9 @@ export default class TechnologyList extends Component {
                 </View>
                 <View style={styles.dataRowViewItem}>
                     <Text style={BaseStyles.contentText}>{rowData.date}</Text>
+                </View>
+                <View style={styles.dataRowViewItem}>
+                    <Text style={BaseStyles.titleText}>状态</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -212,7 +227,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        width: (width - 280) / 2,
+        width: (width - 280) / 3,
         height: 60,
         borderRightWidth: 1,
     },

@@ -10,7 +10,7 @@ import {
     View,
     TextInput
 } from 'react-native';
-
+import ViewButton from '../../commons/ViewButton';
 import TableView from '../../commons/tableView'
 import ReaioButtons from '../../commons/redioButtons'
 import DatePicker from '../../commons/datePicker'
@@ -29,7 +29,8 @@ export default class CheckList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listData: [{id:1,name:'任务1',createDate:'2017-01-03',status:'0'}]
+            listData: [{id:1,name:'任务1',createDate:'2017-01-03',status:'0'}],
+            status:false
         }
         ;
     }
@@ -48,16 +49,30 @@ export default class CheckList extends Component {
                                 (data)=>{
                                     const v=data.key;
                                     this.getDataByQuery([{key:'status',value:v}]);
+                                    if(v=='1'){
+                                        this.state = {
+                                            status:true
+                                        }
+                                    }else{
+                                        this.state = {
+                                            status:false
+                                        }
+                                    }
                                 }
                             }
                         />
                     </View>
                   </View>
+                  <View style={styles.head_commit}>
+                      <View>
+                          {this.showSubmit(this.state.status)}
+                      </View>
+                  </View>
               </View>
               <View style={styles.content}>
                 <View style={styles.content_left}>
                   <View style={styles.content_left_head}>
-                    <Text style={styles.head_text}>区域{this.state.listData.length}</Text>
+                    <Text style={styles.head_text}>区域</Text>
                   </View>
                   <View>
                     <ReaioButtons dataSource={data} callback={(data)=>{
@@ -79,7 +94,13 @@ export default class CheckList extends Component {
             </View>
         );
     }
-
+    showSubmit(status){
+        if(status==false){
+            return (<View></View>);
+        }else{
+            return (<ViewButton text="提交" onPress={this._addTechnology.bind(this)}/>)
+        }
+    }
     /**
      * 跳转到编辑页面
      * @param data
@@ -105,7 +126,9 @@ export default class CheckList extends Component {
             listData: list
         });
     }
+    _addTechnology(){
 
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -122,9 +145,15 @@ const styles = StyleSheet.create({
         paddingLeft:10
     },
     head_right:{
-        flex:3,
+        flex:2,
         justifyContent:'center',
         alignItems: 'center'
+    },
+    head_commit:{
+        flex:0.5,
+        justifyContent:'center',
+        alignItems: 'center',
+        paddingRight:40
     },
     head_text:{
         fontSize:20
